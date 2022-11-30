@@ -1,41 +1,52 @@
 ---
-title: "AJ's Quarto"
+title: "AJs quarto"
 format: html
 editor: visual
 ---
 
-1.  Data
+1.  11/30/2022 Data SAS
 
-    ```{r}
-    library(haven)
-    adae <- read_sas("https://github.com/elong0527/r4csr/raw/master/data-adam/adae.sas7bdat", 
-        NULL)
-    adae
+```{r}
+library(tidyverse)
+library(haven)
+adae <- read_sas("https://github.com/elong0527/r4csr/raw/master/data-adam/adae.sas7bdat", 
+    NULL)
 
-    ```
+adae
+```
 
-2.  Visualize
+2.  Viz
 
-    ```{r}
-    library(ggplot2)
-    ggplot(adae) +
-      aes(x = AESEV, y = AGE, fill = SEX) +
-      geom_col() +
-      scale_fill_hue(direction = 1) +
-      theme_minimal()
-    ```
+\`
 
-3.  Interactive Viz
+```{r}
 
-    ```{r}
-    library(plotly)
-    library(ggplot2)
+adae_sev <- adae %>%
+ filter(AESEV %in% "SEVERE")
 
-    dv1 <- ggplot(adae) +
-      aes(x = AESEV, y = AGE, fill = SEX) +
-      geom_col() +
-      scale_fill_hue(direction = 1) +
-      theme_minimal()
+```
 
-    ggplotly(dv1)
-    ```
+```{r}
+library(ggplot2)
+ggplot(adae_sev) +
+  aes(x = AESEV, y = AGE, fill = SEX) +
+  geom_col() +
+  scale_fill_hue(direction = 1) +
+  theme_minimal()
+
+```
+
+2.  Int Viz
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+dv1 <- ggplot(adae_sev) +
+  aes(x = AESEV, y = AGE, fill = SEX) +
+  geom_col() +
+  scale_fill_hue(direction = 1) +
+  theme_minimal()
+
+ggplotly(dv1)
+```
