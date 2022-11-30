@@ -14,7 +14,7 @@ editor: visual
 
     ```
 
-2.  Visualize
+2.  Canad
 
     ```{r}
     library(ggplot2)
